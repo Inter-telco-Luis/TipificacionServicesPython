@@ -1,0 +1,5 @@
+.barra{
+    height: auto;
+    max-height: 720px;  
+    overflow-x: hidden; 
+}
