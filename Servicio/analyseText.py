@@ -1,7 +1,6 @@
 import openpyxl
 from fuzzywuzzy import fuzz
-import re, string
-from unicodedata import normalize
+import re 
 
 def read_dict_tipicacion():
     dictionaryTipification = openpyxl.load_workbook('Tipificacion Dynamics.xlsx')
@@ -59,22 +58,21 @@ def compare_text(message):
     messageBody = replace_accent(messageBody)
 
     # Se tiene en las variables motivo, negocio,tipologia3,tipologia4 las columnas del diccionario dado por Andes
-    # Se compara cada palabra de la tipologia 4 con cada palabra del mensaje y se guarda y suma el porsentaje de similitud con fuzz
-    # o se entrena algoritmo con amazon comprehend.
-    # Inicialmente se realiza utilizando la libreria Fuzz
+    # Se compara todo el mensaje con el texto de cada celda de la Tipologia4 para lo cual se utiliza fuzzywuzzy
     
     percentajeSimilarity = [] # almacena el porcentaje de coincidencia del texto de cada celda de la tipologia 4 con el mensaje
     for indexT4,statement in enumerate(tipologia4):
         statement = replace_accent(statement)
-        print(statement)
+        #print(statement)
         similarity = fuzz.token_set_ratio(statement,messageBody)
-        print(indexT4,statement +"________________________"+str(similarity))
+        # print(indexT4,similarity,statement, messageBody)
+        #print(indexT4,statement +"________________________"+str(similarity))
         percentajeSimilarity.append(similarity)
         #print(words)
     
     # Se extrae el indice de la tipologia con mayor similitud
     indexMaxSimilarity = percentajeSimilarity.index(max(percentajeSimilarity)) 
-    print(indexMaxSimilarity)
+    #print(indexMaxSimilarity)
 
     return (motivo[indexMaxSimilarity],negocio[indexMaxSimilarity],tipologia3[indexMaxSimilarity],tipologia4[indexMaxSimilarity])
 

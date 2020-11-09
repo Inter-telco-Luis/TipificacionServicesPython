@@ -5,8 +5,8 @@ from flask import jsonify
 from flask_cors import CORS
 import numpy as np
 import os
-from DBComprobantes import fill_db_comprobantes## Aqui se debe llamar al servicio que lee el excel y que resive el texto
- 
+from analyseText import compare_text
+
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
@@ -30,15 +30,15 @@ class User(Resource):
         parser.add_argument("datos")
         args = parser.parse_args()
 
-        print('\nPARAMETROS ENTRADA:')
+        #print('\nPARAMETROS ENTRADA:')
         for key,value in args.items():
-            imgName=value
-            print(imgName) #parameters=value.split(",")
+            message=value
+            #print(message) #parameters=value.split(",")
 
-        fill_db_comprobantes(imgName)
-        return True
+        motivo,negocio,tipologia3,tipologia4 = compare_text(message)
+        return [motivo,negocio,tipologia3,tipologia4]
 
 
 api.add_resource(User, "/")
 
-app.run(debug=True, port=4000, host='0.0.0.0')
+app.run(debug=True, port=6000, host='0.0.0.0')
