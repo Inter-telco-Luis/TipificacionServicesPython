@@ -38,63 +38,36 @@ def clean_message(message):
 
 def replace_accent(text):
     # Quita las tildes del texto que ingresa
-    text.replace("á","a")
-    text.replace("é","e")
-    text.replace("í","i")
-    text.replace("ó","o")
-    text.replace("ú","u")
-    text.replace(",","")
-    text.replace(".","")
-    text.replace(":","")
-    text.replace(";","")
+    text = text.replace("á","a")
+    text = text.replace("é","e")
+    text = text.replace("í","i")
+    text = text.replace("ó","o")
+    text = text.replace("ú","u")
+    text = text.replace(","," ")
+    text = text.replace("."," ")
+    text = text.replace(":"," ")
+    text = text.replace(";"," ")
+    text = text.replace("body>","")
+
 
     return text
-
-def compare_T4_message(words,message):
-    # Resive el mensaje y las palabras con las que debe copararlo para generar un porcentaje de 
-    # similitud de acuerdo al numero de palabras similares.
-
-    similarity=0
-    countWord=0 # cuenta el numero de palabras de mas de dos cifras, exceptuando la preposicion no que tambien se cuenta como palabra
-    # Se tranforma en minusculas message
-    message = message.lower()
-    # Se quitan tildes, puntos, comas, dos puntos de words y de message
-    message = replace_accent(message)
-
-
-
-    for word in words:
-        word = word.lower()
-        if len(word) > 2 and word != "no":
-            countWord=countWord+1
-            word = replace_accent(word)
-            if word in message:
-                #print(word)
-                similarity=similarity+100
-            else:
-                similarity = similarity + fuzz.token_sort_ratio(word,message)
-
-    #similarity=similarity/countWord
-    return similarity
 
 
 def compare_text(message):
     motivo,negocio,tipologia3,tipologia4 = read_dict_tipicacion()
-
     messageBody = clean_message(message)
+    messageBody = replace_accent(messageBody)
 
     # Se tiene en las variables motivo, negocio,tipologia3,tipologia4 las columnas del diccionario dado por Andes
     # Se compara cada palabra de la tipologia 4 con cada palabra del mensaje y se guarda y suma el porsentaje de similitud con fuzz
     # o se entrena algoritmo con amazon comprehend.
     # Inicialmente se realiza utilizando la libreria Fuzz
     
-
     percentajeSimilarity = [] # almacena el porcentaje de coincidencia del texto de cada celda de la tipologia 4 con el mensaje
     for indexT4,statement in enumerate(tipologia4):
-        # words es una lista que contiene cada palabra de la frase(statement) actual de la tipologia 4
-        words=statement.split(" ")
-        # se llama a la funcion para comparar cada palabra de la celda actual de la tipologia 4 con el menssaje y que retorna el grado de similitud.
-        similarity=compare_T4_message(words,messageBody)
+        statement = replace_accent(statement)
+        print(statement)
+        similarity = fuzz.token_set_ratio(statement,messageBody)
         print(indexT4,statement +"________________________"+str(similarity))
         percentajeSimilarity.append(similarity)
         #print(words)
