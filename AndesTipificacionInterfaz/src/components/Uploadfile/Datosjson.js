@@ -35,31 +35,23 @@ class Datosjson extends Component {
     }
 
 
-	// On file upload (click the upload button) 
-	onTextUpload = event => {
-    var data = new FormData();
-    data.append('datos', this.state.texto);
-    
-    var config = {
-      method: 'post',
-      url: 'http://localhost:5001/',
-      data : data
-    };
-    
-    axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      this.setState(
-        {
-        tipificacion:  response.data
-        })
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    onTextUpload = () => {
+      // Create an object of formData
+      const formData = new FormData(); 
+      // Se forma las etiquetas de la peticion
+      formData.append("datos",this.state.texto);  
+      console.log(this.state.texto); 
+      // Envio de peticion al servidor
+      axios.post("http://localhost:5001", formData)
+      .then(response => {
+          this.setState({
+          tipificacion:  response.data,
+          });
+          // console.log(this.state.suma_grupoAC)
+          return response
+      });
 
-    }; 
-
+      }; 
 	
 	render() { 
     // const { texto ="" } = this.state;
@@ -82,23 +74,24 @@ class Datosjson extends Component {
                   onChange={this.handleChange}
                 />
                 <button onClick={this.onTextUpload}> 
-                    Cargar 
+                  Cargar
                 </button>
               </Table.HeaderCell>
-              <TableBody>
+
+            
+            </Table.Row>
+            <TableBody>
                 <Table.Row>
                   <Table.Cell>
-                    {tipificacion}
-                    {/* <Input
-                      defaulValue = {this.state.tipificacion}
-                    /> */}
+                    <Input
+                      value = {tipificacion}
+                      size='big'
+                    />
                     
                   </Table.Cell>
                 </Table.Row>
 
               </TableBody>
-            
-            </Table.Row>
           </Table>
         </Header>
       </>
