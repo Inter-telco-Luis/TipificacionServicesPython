@@ -42,7 +42,7 @@ class Datosjson extends Component {
       formData.append("datos",this.state.texto);  
       console.log(this.state.texto); 
       // Envio de peticion al servidor
-      axios.post("http://localhost:5001", formData)
+      axios.post("http://54.234.133.155:5001", formData)
       .then(response => {
           this.setState({
           tipificacion:  response.data,
