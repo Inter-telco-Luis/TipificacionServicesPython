@@ -35,7 +35,7 @@ def clean_message(message):
             flag=1
             messageBody=line
         elif flag == 1:
-            if "completado por" not in line.lower():
+            if "completado por" != line.lower():
                 messageBody = messageBody +" "+line
             else:
                 flag =0
@@ -97,8 +97,7 @@ if __name__ == "__main__":
     body> buenas quiero realizar una cancelacion de Tarjeta
     quiiseira 
 
-    completado por
-
+completado por
 
     asi que por
 
