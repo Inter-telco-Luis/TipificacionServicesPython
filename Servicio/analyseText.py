@@ -26,13 +26,22 @@ def clean_message(message):
         lineNoSpaces = re.sub("\W","",line)
         if lineNoSpaces != "":
             messageFilter.append(line)
-            print(line)
+            #print(line)
 
     messageBody=""
+    flag = 0
     for line in messageFilter:
         if "body>" in line:
+            flag=1
             messageBody=line
+        elif flag == 1:
+            if "completado por" not in line.lower():
+                messageBody = messageBody +" "+line
+            else:
+                flag =0
 
+        
+    print(messageBody)
     return messageBody
 
 def replace_accent(text):
@@ -81,7 +90,24 @@ def tipificacion_message():
     return True
 
 if __name__ == "__main__":
-    message = '''body> buenas quiero realizar una cancelacion de Tarjeta'''    
+    message = '''
+    
+    cual es tu 
+
+    body> buenas quiero realizar una cancelacion de Tarjeta
+    quiiseira 
+
+    completado por
+
+
+    asi que por
+
+
+    debo
+
+     
+
+    '''    
     motivo,negocio,tipologia3,tipologia4 = compare_text(message)
     print(motivo,negocio,tipologia3,tipologia4)
 
