@@ -10,14 +10,16 @@ def read_dict_tipicacion():
     negocio=[]
     tipologia3=[]
     tipologia4=[]
+    CPC_Escala=[]
     for indexCell in range(1,hoja1.max_row):
         motivoConsulta.append(hoja1.cell(row=indexCell,column = 1).value)
         #print(hoja1.cell(row=indexCell,column = 4).value)
         negocio.append(hoja1.cell(row=indexCell,column = 2).value)
         tipologia3.append(hoja1.cell(row=indexCell,column = 3).value)
         tipologia4.append(hoja1.cell(row=indexCell,column = 4).value)
+        CPC_Escala.append(hoja1.cell(row=indexCell,column = 6).value)
 
-    return motivoConsulta,negocio,tipologia3,tipologia4
+    return motivoConsulta,negocio,tipologia3,tipologia4,CPC_Escala
 
 def clean_message(message):
     #messageList=message.split("\n")
@@ -67,7 +69,7 @@ def replace_accent(text):
 
 
 def compare_text(message):
-    motivo,negocio,tipologia3,tipologia4 = read_dict_tipicacion()
+    motivo,negocio,tipologia3,tipologia4,CPC_Escala = read_dict_tipicacion()
     messageBody = clean_message(message)
     messageBody = replace_accent(messageBody)
 
@@ -88,7 +90,7 @@ def compare_text(message):
     indexMaxSimilarity = percentajeSimilarity.index(max(percentajeSimilarity)) 
     #print(indexMaxSimilarity)
 
-    return (motivo[indexMaxSimilarity],negocio[indexMaxSimilarity],tipologia3[indexMaxSimilarity],tipologia4[indexMaxSimilarity])
+    return (motivo[indexMaxSimilarity],negocio[indexMaxSimilarity],tipologia3[indexMaxSimilarity],tipologia4[indexMaxSimilarity],CPC_Escala[indexMaxSimilarity])
 
 def tipificacion_message():
 
@@ -4004,8 +4006,8 @@ Expandido, haga clic aquí para contraer
      
 
     '''    
-    motivo,negocio,tipologia3,tipologia4 = compare_text(message)
-    print(motivo,negocio,tipologia3,tipologia4)
+    motivo,negocio,tipologia3,tipologia4,CPC_Escala = compare_text(message)
+    print(motivo,negocio,tipologia3,tipologia4,CPC_Escala)
 
 
     

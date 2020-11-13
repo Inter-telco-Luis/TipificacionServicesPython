@@ -35,8 +35,8 @@ class User(Resource):
             message=value
             #print(message) #parameters=value.split(",")
 
-        motivo,negocio,tipologia3,tipologia4 = compare_text(message)
-        return [motivo,negocio,tipologia3,tipologia4]
+        motivo,negocio,tipologia3,tipologia4,CPC_Escala = compare_text(message)
+        return [motivo,negocio,tipologia3,tipologia4,CPC_Escala]
 
 
 api.add_resource(User, "/")
