@@ -50,7 +50,8 @@ class Datosjson extends Component {
       // Create an object of formData
       const formData = new FormData(); 
       // Se forma las etiquetas de la peticion
-      formData.append("datos",this.state.textoMensage);  
+      formData.append("datos",this.state.textoMensage);
+      formData.append("service","1")  
       // console.log(this.state.texto); 
       // Envio de peticion al servidor
       axios.post("http://54.234.133.155:5001", formData)
@@ -68,7 +69,8 @@ class Datosjson extends Component {
         // Create an object of formData
         const formData = new FormData(); 
         // Se forma las etiquetas de la peticion
-        formData.append("datos",this.state.textoDatosCliente);   
+        formData.append("datos",this.state.textoDatosCliente);
+        formData.append("service","2")   
         // Envio de peticion al servidor
         axios.post("http://54.234.133.155:5001", formData)
         .then(response => {

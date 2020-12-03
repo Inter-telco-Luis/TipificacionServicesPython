@@ -6,6 +6,7 @@ from flask_cors import CORS
 import numpy as np
 import os
 from analyseText import compare_text
+from organiceClientData import organice_client_data
 
 app = Flask(__name__)
 api = Api(app)
@@ -28,15 +29,23 @@ class User(Resource):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("datos")
+        parser.add_argument("service")
         args = parser.parse_args()
 
-        #print('\nPARAMETROS ENTRADA:')
-        for key,value in args.items():
-            message=value
-            #print(message) #parameters=value.split(",")
+        if args["service"]=="1":
+            #print('\nPARAMETROS ENTRADA:')
+            # for key,value in args.items():
+            #     message=value
+            message=args["datos"]
+                #print(message) #parameters=value.split(",")
 
-        motivo,negocio,tipologia3,tipologia4,CPC_Escala = compare_text(message)
-        return [motivo,negocio,tipologia3,tipologia4,CPC_Escala]
+            motivo,negocio,tipologia3,tipologia4,CPC_Escala = compare_text(message)
+            return [motivo,negocio,tipologia3,tipologia4,CPC_Escala]
+        elif args["service"]=="2":
+            datosCliente=args["datos"]
+            name,cellPhone,cedula,idCard,city,numOrder,officeGuide=organice_client_data(datosCliente)
+            return[name,cellPhone,cedula,idCard,city,numOrder,officeGuide]
+
 
 
 api.add_resource(User, "/")
