@@ -85,10 +85,9 @@ def extract_email(messageBody):
         if ".com" in messageBody:
             indexEmail=messageBody.find("correo electronico:")
             indexCom=messageBody.find(".com-")
-            x=messageBody[indexCom:10]
             email=messageBody[indexEmail+len("correo electronico:"):indexCom+len(".com")]
-            email=re.sub(" ","",email)
-
+            
+    email=re.sub(" ","",email)
 
     return email
 
