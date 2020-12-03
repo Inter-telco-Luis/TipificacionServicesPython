@@ -92,7 +92,7 @@ def organice_client_data(textPage):
     textPageList=textPage.split("  ")
     name,cellPhone,idCard,city,numOrder,officeGuide=" "," "," "," "," "," "
     for indexLine,line in enumerate(textPageList):
-        print(indexLine,line)
+        #print(indexLine,line)
         if "Direccion de Entrega" in line:
             city=extract_city(textPageList[indexLine+1])
             name=extract_name(line)

@@ -34,7 +34,7 @@ def clean_message(message):
     messageBody=""
     flag = 0
     for index_line,line in enumerate(messageFilter):
-        print(str(index_line)+"_________________________"+line)
+        #print(str(index_line)+"_________________________"+line)
         if "body" in line:
             if ">" in line:
                 flag=1
@@ -71,7 +71,7 @@ def extract_email(messageBody):
     # Recive el cuerpo del mensaje
     # Filtra informacion innecesaria
     # Retorna email
-    # Se utiliza cuando no se encuentra el correo en la casilla de email de la pagina
+    email="" # Se utiliza cuando no se encuentra el correo en la casilla de email de la pagina
     indexEmail=0
     indexCom=0
     messageBody=messageBody.lower()
