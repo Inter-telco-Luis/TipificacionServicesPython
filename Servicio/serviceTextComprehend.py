@@ -39,8 +39,8 @@ class User(Resource):
             message=args["datos"]
                 #print(message) #parameters=value.split(",")
 
-            motivo,negocio,tipologia3,tipologia4,CPC_Escala = compare_text(message)
-            return [motivo,negocio,tipologia3,tipologia4,CPC_Escala]
+            motivo,negocio,tipologia3,tipologia4,CPC_Escala,email = compare_text(message)
+            return [motivo,negocio,tipologia3,tipologia4,CPC_Escala,email]
         elif args["service"]=="2":
             datosCliente=args["datos"]
             name,cellPhone,cedula,idCard,city,numOrder,officeGuide=organice_client_data(datosCliente)
