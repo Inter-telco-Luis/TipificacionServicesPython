@@ -95,7 +95,7 @@ class Datosjson extends Component {
           <Table>
             <Table.Row>
             <h1>Servicio para el Proceso de Tipificacion</h1>
-              Mensage: <Input defaultValue="" valor="valor" type= "text" size='big' placeholder = "Mensage" onChange={this.handleChange}/> <button onClick={this.onTextUpload}> Cargar </button>
+              Mensage: <Input defaultValue="" valor="valor" type= "text" size='big' placeholder = "Mensage" onChange={this.handleChange}/> <button onClick={this.onTextUpload}> Cargar S1 </button>
             </Table.Row>
             <br/>
             <Table.Row>
@@ -103,7 +103,7 @@ class Datosjson extends Component {
             </Table.Row>
             <br/>
             <Table.Row>
-              Datos Cliente: <Input defaultValue="" valor="valor" type= "text" size='big' placeholder = "Datos del Cliente Vtex" onChange={this.dataUpClient}/> <button onClick={this.service2Tipificacion}> Cargar </button>  
+              Datos Cliente: <Input defaultValue="" valor="valor" type= "text" size='big' placeholder = "Datos del Cliente Vtex" onChange={this.dataUpClient}/> <button onClick={this.service2Tipificacion}> Cargar S2</button>  
             </Table.Row>  
             <br/>
             <Table.Row>

@@ -63,8 +63,8 @@ def extract_city(lineCity):
     # Resive la line en donde se encuntra la direccion y la ciudad
     # Filtra la ciudad y la retorna
     lineCity=replace_accent(lineCity)
-    #print(lineCity)
     listCities=read_dict_city()
+    lineCity = lineCity.split("/")[0]
     for city in listCities:
         if city.lower() in lineCity.lower():
             #print(city)
@@ -103,7 +103,7 @@ def organice_client_data(textPage):
             numOrder=extract_num_order(textPageList[indexLine+2])
         elif "Numero de rastreo" in line:
             officeGuide=extract_office_guide(line)
-            print("-------------------------------Guia Transportadora:",officeGuide)
+            #print("-------------------------------Guia Transportadora:",officeGuide)
             
     
     return (name,cellPhone,"Cédula",idCard,city,numOrder,officeGuide)
