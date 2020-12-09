@@ -78,8 +78,8 @@ def extract_email(messageBody):
     if "email:" in messageBody:
         if ".com " in messageBody:
             indexEmail=messageBody.find("email:")
-            indexCom=messageBody.find(".com ")
-            email=messageBody[indexEmail+len("email:"):indexCom+len(".com ")]
+            indexCom=messageBody.find("solicitud")
+            email=messageBody[indexEmail+len("email:"):indexCom]
 
     elif "correo electronico:" in messageBody:
         if ".com" in messageBody:
@@ -116,7 +116,7 @@ def compare_text(message):
 
     # Se agrega funcionalidad para extraer correo de los datos de la pagina.
     email=extract_email(messageBody)
-
+    # print("-"+email+"-")
     return (motivo[indexMaxSimilarity],negocio[indexMaxSimilarity],tipologia3[indexMaxSimilarity],tipologia4[indexMaxSimilarity],CPC_Escala[indexMaxSimilarity],email)
 
 def tipificacion_message():
